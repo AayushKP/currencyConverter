@@ -1,4 +1,5 @@
-import React, { useId } from "react";
+// InputBox.jsx
+import React, { useRef } from "react";
 
 function InputBox({
   label,
@@ -7,27 +8,25 @@ function InputBox({
   onCurrencyChange,
   currencyOptions = [],
   selectCurrency = "usd",
-  amountDisable = false,
   currencyDisable = false,
   className = "",
 }) {
-  const amountInputId = useId();
+  const amountInputRef = useRef(null);
 
   return (
     <div className={`bg-white p-3 rounded-lg text-sm flex ${className}`}>
       <div className="w-1/2">
         <label
-          htmlFor={amountInputId}
+          htmlFor={label.toLowerCase()} // Correctly set htmlFor attribute
           className="text-black/40 mb-2 inline-block"
         >
           {label}
         </label>
         <input
-          id={amountInputId}
+          ref={amountInputRef}
           className="outline-none w-full bg-transparent py-1.5"
           type="number"
           placeholder="Amount"
-          disabled={amountDisable}
           value={amount}
           onChange={(e) =>
             onAmountChange && onAmountChange(Number(e.target.value))
